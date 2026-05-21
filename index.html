@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="African People Collaboration Donegal (APCD) is an umbrella organisation uniting six African community groups across County Donegal, Ireland.">
+  <meta name="theme-color" content="#0D1B11">
+
+  <title>APCD, African People Collaboration Donegal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <link rel="icon" type="image/png" href="assets/APCD/logo-light.png">
+</head>
+<body>
+
+  <!-- Ambient sky strip (sits behind the fixed nav) -->
+  <div id="sky-strip" aria-hidden="true" role="presentation">
+    <svg id="sun-element" width="28" height="28" viewBox="0 0 28 28"
+         xmlns="http://www.w3.org/2000/svg"
+         style="position:absolute; transform:translate(-50%,-50%); pointer-events:none; z-index:2; display:none;">
+      <circle cx="14" cy="14" r="9"  fill="#FDB813" opacity="0.85"/>
+      <circle cx="14" cy="14" r="13" fill="#FDB813" opacity="0.18"/>
+    </svg>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= NAV ================= -->
+  <header>
+    <nav class="nav" aria-label="Primary">
+      <div class="container nav__inner">
+        <a class="nav__brand" href="index.html" aria-label="APCD home">
+          <span class="nav__logo" aria-hidden="true">
+            <img src="assets/APCD/logo-dark.png" alt="" onerror="this.style.display='none'; this.parentNode.textContent='A';">
+          </span>
+          <span class="nav__brand-text">
+            <span class="nav__brand-name">APCD</span>
+            <span class="nav__brand-tag">Unity. Culture. Collaboration. Empowerment.</span>
+          </span>
+        </a>
+
+        <ul class="nav__links" role="list">
+          <li><a href="index.html"     data-nav-link>Home</a></li>
+          <li><a href="about.html"     data-nav-link>About Us</a></li>
+          <li><a href="members.html"   data-nav-link>Members</a></li>
+          <li><a href="events.html"    data-nav-link>Events</a></li>
+          <li><a href="business.html"  data-nav-link>Business Connect</a></li>
+          <li><a href="contact.html"   data-nav-link>Contact</a></li>
+        </ul>
+
+        <a class="btn btn--primary nav__cta" href="contact.html">Get In Touch</a>
+
+        <button class="nav__toggle" type="button" data-nav-toggle aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobile-drawer" class="mobile-drawer" data-mobile-drawer aria-label="Mobile navigation">
+      <a href="index.html"    data-nav-link>Home</a>
+      <a href="about.html"    data-nav-link>About Us</a>
+      <a href="members.html"  data-nav-link>Members</a>
+      <a href="events.html"   data-nav-link>Events</a>
+      <a href="business.html" data-nav-link>Business Connect</a>
+      <a href="contact.html"  data-nav-link>Contact</a>
+      <a class="btn btn--primary" href="contact.html">Get In Touch</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <!-- Drifting country names (background decoration, populated by JS) -->
+      <div id="country-scroll-container" aria-hidden="true" role="presentation"></div>
+
+      <div class="hero__texture" aria-hidden="true"></div>
+
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <span class="hero__badge">Donegal's African Community Hub</span>
+
+        <h1 class="fade-in">
+          Where African Communities Come Together to
+          <span class="gold">Collaborate</span>,
+          Connect and
+          <span class="green">Grow</span>
+        </h1>
+
+        <p class="hero__sub fade-in">
+          African People Collaboration Donegal (APCD) is an umbrella organisation
+          uniting six African community groups across County Donegal, Ireland.
+          Together we build. Together we belong.
+        </p>
+
+        <div class="hero__ctas fade-in">
+          <a class="btn btn--primary" href="members.html">Meet Our Members</a>
+          <a class="btn btn--outline" href="about.html">Our Story</a>
+        </div>
+      </div>
+
+      <div class="pan-stripe hero__stripe" aria-hidden="true"></div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section class="stats" aria-label="APCD at a glance">
+      <div class="container">
+        <div class="stats__grid">
+          <div class="stat fade-in">
+            <div class="stat__num">6</div>
+            <div class="stat__label">Registered Member Organisations</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat__num">2025</div>
+            <div class="stat__label">Active and Growing</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat__num">1</div>
+            <div class="stat__label">Unified Voice for the Community</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="stat__num">Donegal</div>
+            <div class="stat__label">Our Home, Our Community</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4 PILLARS ================= -->
+    <section class="section section--off">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag fade-in">What We Do</span>
+          <h2 class="fade-in">Built on Four Pillars</h2>
+          <p class="lead fade-in">
+            Everything APCD does is rooted in four guiding principles that shape
+            how we serve, advocate for, and celebrate African communities in Donegal.
+          </p>
+        </div>
+
+        <div class="grid grid-4">
+          <article class="pillar pillar--red fade-in">
+            <span class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="8" r="3"/>
+                <circle cx="17" cy="9" r="2.5"/>
+                <path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/>
+                <path d="M14 19c.5-2.5 2.5-4 4-4s3 1 3.5 3"/>
+              </svg>
+            </span>
+            <h3>Community</h3>
+            <p>Bringing African families and individuals together across Donegal through shared identity, events, and support networks.</p>
+          </article>
+
+          <article class="pillar pillar--gold fade-in">
+            <span class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <ellipse cx="12" cy="12" rx="4" ry="9"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+              </svg>
+            </span>
+            <h3>Culture</h3>
+            <p>Celebrating and preserving the rich diversity of African cultures, traditions, languages, and heritage in Ireland.</p>
+          </article>
+
+          <article class="pillar pillar--green fade-in">
+            <span class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="12" r="5.5"/>
+                <circle cx="15" cy="12" r="5.5"/>
+              </svg>
+            </span>
+            <h3>Collaboration</h3>
+            <p>Uniting six member organisations under one umbrella to speak with a single, powerful collective voice.</p>
+          </article>
+
+          <article class="pillar pillar--black fade-in">
+            <span class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="20" x2="12" y2="6"/>
+                <polyline points="6,12 12,6 18,12"/>
+              </svg>
+            </span>
+            <h3>Empowerment</h3>
+            <p>Supporting African community members to access services, opportunities, and representation in Donegal.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MISSION ================= -->
+    <section class="section section--dark mission">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <span class="section-tag on-dark fade-in">Our Mission</span>
+            <h2 class="fade-in">Amplifying African Voices in Donegal</h2>
+            <p class="fade-in" style="color: rgba(255,255,255,0.8);">
+              APCD exists to provide a collective voice for African communities in
+              Donegal. We work with statutory bodies, local councils, NGOs, and
+              funders to ensure our communities are heard, represented, and served.
+            </p>
+            <a class="btn btn--primary fade-in" href="about.html">Learn About APCD</a>
+          </div>
+
+          <div class="mission__quote fade-in">
+            <p class="mission__quote-text">
+              <span class="white">Unity.</span>
+              <span class="gold">Culture.</span>
+              <span class="green">Collaboration.</span>
+              <span class="red">Empowerment.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EVENTS TEASER ================= -->
+    <section class="section section--light">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag fade-in">Upcoming Events</span>
+          <h2 class="fade-in">Africa Day Donegal 2025</h2>
+          <p class="lead fade-in">
+            A celebration of African culture, heritage, and community, proudly hosted by APCD.
+          </p>
+        </div>
+
+        <article class="event-teaser fade-in">
+          <p class="event-teaser__meta">Featured Event</p>
+          <h3>Africa Day Donegal 2025</h3>
+          <p>
+            Presented by African People Collaboration Donegal. A day of music, food,
+            dance, and culture celebrating the African diaspora in County Donegal.
+          </p>
+
+          <p style="font-weight: 600; margin-bottom: 0.4rem;">APCD Registered Groups:</p>
+          <ul class="event-teaser__groups">
+            <li>Ghana Union Donegal (GUDL)</li>
+            <li>African Community Donegal (ACD)</li>
+            <li>New Community Networks (NCN)</li>
+            <li>Letterkenny Sports and Social Club</li>
+            <li>Igbo Community NorthWest Ireland</li>
+            <li>Sisters Doing It for Themselves</li>
+          </ul>
+
+          <p style="font-size: 0.95rem; color: var(--muted); margin-bottom: 1.25rem;">
+            To register your interest or ask about the event, email
+            <a href="mailto:info@apcdonegal.com" style="color: var(--green); font-weight: 600;">info@apcdonegal.com</a>.
+          </p>
+
+          <a class="event-teaser__cta" href="events.html">View Event Details</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= BUSINESS CONNECT TEASER ================= -->
+    <section class="section section--gold">
+      <div class="container text-center">
+        <h2 class="fade-in">Does Your Business Want to Reach Donegal's African Community?</h2>
+        <p class="fade-in" style="max-width: 720px; margin: 0 auto 1.75rem; color: var(--black);">
+          APCD connects businesses, service providers, and organisations with a
+          growing, engaged African diaspora community across Donegal. Get in touch
+          to explore how we can work together.
+        </p>
+        <a class="btn btn--dark fade-in" href="business.html">Connect With APCD</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="pan-stripe" aria-hidden="true"></div>
+    <div class="container footer__inner">
+      <div>
+        <span class="footer__logo" aria-hidden="true">
+          <img src="assets/APCD/logo-dark.png" alt="">
+        </span>
+        <div class="footer__brand-name">African People Collaboration Donegal</div>
+        <div class="footer__tag">Unity. Culture. Collaboration. Empowerment.</div>
+        <p class="footer__about">
+          The umbrella organisation representing African community groups across
+          County Donegal, Ireland.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer__heading">Quick Links</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="business.html">Business Connect</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer__heading">Contact</div>
+        <ul class="footer__contact">
+          <li><strong>Email:</strong> <a href="mailto:info@apcdonegal.com">info@apcdonegal.com</a></li>
+          <li><strong>Alt:</strong> <a href="mailto:apcdonegal@gmail.com">apcdonegal@gmail.com</a></li>
+          <li><strong>Facebook:</strong> <a href="https://facebook.com/africanpeoplecollaborationdonegal" target="_blank" rel="noopener">africanpeoplecollaborationdonegal</a></li>
+          <li><strong>Instagram:</strong> <a href="https://instagram.com/apcdonegal" target="_blank" rel="noopener">apcdonegal</a></li>
+          <li><strong>Website:</strong> <a href="https://www.apcdonegal.com">www.apcdonegal.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span data-year>2025</span> African People Collaboration Donegal. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/sky.js"></script>
+</body>
+</html>
