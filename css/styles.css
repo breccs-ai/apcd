@@ -1765,13 +1765,19 @@ body.cursor-hover .cursor-ring {
   margin: 2rem 0;
 }
 .flyer-embed-wrapper {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--light-bg);
+  /* PDF is a 17:40 portrait banner (850 x 2000 mm).
+     width is the smaller of (container 100%) or (the width that would make the
+     wrapper exactly fill the available viewport height), so the whole flyer is
+     visible without any inner or outer scrolling on typical viewports. */
+  width: min(100%, calc((100vh - 8rem) * 17 / 40));
+  aspect-ratio: 17 / 40;
+  margin-inline: auto;
 }
-.flyer-embed-wrapper object { display: block; }
+.flyer-embed-wrapper object {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .flyer-fallback {
   padding: 2rem;
   text-align: center;
@@ -1789,9 +1795,9 @@ body.cursor-hover .cursor-ring {
   gap: 1rem;
   margin-top: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 @media (max-width: 480px) {
-  .flyer-embed-wrapper object { height: 480px; }
   .flyer-actions { flex-direction: column; }
   .flyer-actions a { text-align: center; }
 }
