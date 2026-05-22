@@ -16,6 +16,7 @@
     setFooterYear();
     initCountryNames();
     startCountryNamesLoop();
+    initCookieBanner();
   });
 
   /* ---------- 1. Active nav link ---------- */
@@ -383,5 +384,63 @@
   function setFooterYear() {
     var el = document.querySelector('[data-year]');
     if (el) el.textContent = new Date().getFullYear();
+  }
+
+  /* ---------- 8. Cookie consent banner ---------- */
+  function initCookieBanner() {
+    var consent = getCookie('apcd_cookie_consent');
+    if (!consent) showCookieBanner();
+
+    document.addEventListener('click', function (e) {
+      if (e.target && e.target.id === 'cookie-settings-link') {
+        e.preventDefault();
+        showCookieBanner();
+      }
+    });
+  }
+
+  function showCookieBanner() {
+    if (document.getElementById('cookie-banner')) return;
+    var bannerHTML = '<div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">' +
+      '<div class="cookie-banner-inner">' +
+        '<div class="cookie-banner-text">' +
+          '<p>This website uses a cookie to remember your consent preference. We do not use advertising or tracking cookies. Read our <a href="cookies.html">Cookie Policy</a> for full details.</p>' +
+        '</div>' +
+        '<div class="cookie-banner-actions">' +
+          '<button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept</button>' +
+          '<button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    document.body.insertAdjacentHTML('beforeend', bannerHTML);
+
+    document.getElementById('cookie-accept').addEventListener('click', function () {
+      setCookie('apcd_cookie_consent', 'accepted', 365);
+      hideCookieBanner();
+    });
+    document.getElementById('cookie-decline').addEventListener('click', function () {
+      setCookie('apcd_cookie_consent', 'declined', 365);
+      hideCookieBanner();
+    });
+  }
+
+  function hideCookieBanner() {
+    var b = document.getElementById('cookie-banner');
+    if (b) b.remove();
+  }
+
+  function setCookie(name, value, days) {
+    var expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = name + '=' + value + '; expires=' + expires + '; path=/; SameSite=Lax';
+  }
+
+  function getCookie(name) {
+    return document.cookie.split('; ').reduce(function (acc, part) {
+      var pair = part.split('=');
+      var key = pair[0];
+      var val = pair[1];
+      return key === name ? val : acc;
+    }, '');
   }
 })();

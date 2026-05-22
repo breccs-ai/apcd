@@ -1811,3 +1811,173 @@ body.cursor-hover .cursor-ring {
   }
   .flyer-actions a { text-align: center; }
 }
+
+/* ---------- 16. Legal Pages ---------- */
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem);
+}
+.legal-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid var(--border);
+}
+.legal-content h2:first-of-type {
+  margin-top: 0;
+  border-top: none;
+}
+.legal-content p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.legal-content ul {
+  margin: 0.5rem 0 1rem 1.25rem;
+  padding: 0;
+  list-style: disc;
+}
+.legal-content ul li {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.legal-content a {
+  color: var(--green);
+  text-decoration: underline;
+}
+.legal-content a:hover {
+  color: var(--gold);
+}
+.legal-last-updated {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: var(--light-bg);
+  border-left: 3px solid var(--gold);
+  padding: 6px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 2rem;
+}
+.legal-contact-box {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+.legal-contact-box p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* ---------- 17. Footer Legal Row ---------- */
+.footer-legal-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 0;
+}
+.footer-legal-row a {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.78rem;
+  padding: 0 0.75rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.footer-legal-row a:hover {
+  color: var(--gold);
+}
+.footer-legal-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+}
+@media (max-width: 600px) {
+  .footer-legal-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .footer-legal-divider { display: none; }
+}
+
+/* ---------- 18. Cookie Consent Banner ---------- */
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: var(--dark-bg);
+  border-top: 3px solid var(--gold);
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+}
+.cookie-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.cookie-banner-text p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.cookie-banner-text a {
+  color: var(--gold);
+  text-decoration: underline;
+  font-weight: 500;
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.cookie-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.cookie-btn:hover { opacity: 0.88; }
+.cookie-btn-accept {
+  background: var(--gold);
+  color: var(--dark-bg);
+}
+.cookie-btn-decline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+@media (max-width: 600px) {
+  .cookie-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cookie-banner-actions { width: 100%; }
+  .cookie-btn {
+    flex: 1;
+    text-align: center;
+  }
+}
