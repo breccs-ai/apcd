@@ -1759,3 +1759,39 @@ body.cursor-hover .cursor-ring {
   pointer-events: none;
   transition: opacity 2s ease;
 }
+
+/* Flyer Display */
+.flyer-display {
+  margin: 2rem 0;
+}
+.flyer-embed-wrapper {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--light-bg);
+}
+.flyer-embed-wrapper object { display: block; }
+.flyer-fallback {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.flyer-download-link {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.flyer-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .flyer-embed-wrapper object { height: 480px; }
+  .flyer-actions { flex-direction: column; }
+  .flyer-actions a { text-align: center; }
+}
