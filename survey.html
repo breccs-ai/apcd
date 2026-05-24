@@ -426,6 +426,28 @@
       .spinner { animation: none; }
     }
   </style>
+
+  <!-- ================================================================
+       No-JS safety net: this page must render fully without JavaScript.
+       The scroll fade-in effect in styles.css starts every .fade-in
+       element at opacity:0; without JS to add .visible the page would
+       look blank below the nav. These overrides keep all content
+       visible immediately, then JS (if present) can still animate.
+       ================================================================ -->
+  <noscript>
+    <style>
+      .fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      #survey-submit {
+        display: none !important;
+      }
+      .noscript-warning {
+        display: block !important;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
 
@@ -460,6 +482,7 @@
           <li><a href="about.html"     data-nav-link>About Us</a></li>
           <li><a href="members.html"   data-nav-link>Members</a></li>
           <li><a href="events.html"    data-nav-link>Events</a></li>
+          <li><a href="survey.html"    data-nav-link>Survey</a></li>
           <li><a href="business.html"  data-nav-link>Business Connect</a></li>
           <li><a href="contact.html"   data-nav-link>Contact</a></li>
         </ul>
@@ -477,6 +500,7 @@
       <a href="about.html"    data-nav-link>About Us</a>
       <a href="members.html"  data-nav-link>Members</a>
       <a href="events.html"   data-nav-link>Events</a>
+      <a href="survey.html"   data-nav-link>Survey</a>
       <a href="business.html" data-nav-link>Business Connect</a>
       <a href="contact.html"  data-nav-link>Contact</a>
       <a class="btn btn--primary" href="contact.html">Get In Touch</a>
@@ -505,7 +529,7 @@
         <div class="survey-wrap">
 
           <!-- Intro card with logo + event details -->
-          <div class="survey-intro fade-in">
+          <div class="survey-intro">
             <span class="survey-intro__logo" aria-hidden="true">
               <img src="assets/APCD/logo-light.png" alt="" onerror="this.style.display='none'">
             </span>
@@ -532,7 +556,7 @@
               Please review the questions highlighted below and try again.
             </div>
 
-            <form id="survey-form" class="fade-in" novalidate>
+            <form id="survey-form" novalidate>
 
               <!-- ============ Q1 Respondent Type ============ -->
               <fieldset class="question-card" data-required>
@@ -822,6 +846,20 @@
                 <button id="survey-submit" type="submit" class="btn btn--primary form__submit">
                   <span class="submit-label">Submit My Feedback</span>
                 </button>
+                <noscript>
+                  <p class="noscript-warning" role="alert"
+                     style="display:block; flex:1 1 100%; margin:0;
+                            padding:0.85rem 1rem;
+                            border-left:4px solid var(--red);
+                            background:rgba(192,57,43,0.08);
+                            color:#7a2316; border-radius:0 6px 6px 0;
+                            font-size:0.92rem; line-height:1.55;">
+                    <strong>JavaScript is required to submit this form.</strong>
+                    You can read every question above, but submission needs
+                    JavaScript to be enabled. Please enable JavaScript in your
+                    browser and refresh the page.
+                  </p>
+                </noscript>
                 <p class="privacy-note">
                   We collect no personal data with your responses. Your
                   feedback is fully anonymous.
