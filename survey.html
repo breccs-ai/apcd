@@ -199,6 +199,25 @@
       line-height: 1;
     }
 
+    /* Rating row (Q5): keep stars flush left, then a single gap, then the
+       label, all on the same baseline. The .option flex container already
+       handles the radio input + this wrapper as siblings. */
+    .rating-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      line-height: 1.25;
+      flex-wrap: wrap;
+    }
+    .rating-stars {
+      flex-shrink: 0;
+      white-space: nowrap;
+      font-size: 1rem;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
     .conditional {
       margin-top: 0.85rem;
       padding-top: 0.85rem;
@@ -330,11 +349,12 @@
     }
 
     .privacy-note {
-      font-size: 0.85rem;
+      flex: 1 1 100%;
+      margin: 0.85rem 0 0;
+      font-size: 0.8125rem;
       color: var(--muted);
-      flex: 1 1 220px;
-      line-height: 1.55;
-      margin: 0;
+      line-height: 1.6;
+      max-width: 68ch;
     }
 
     .spinner {
@@ -660,26 +680,46 @@
               <!-- ============ Q5 Overall Experience ============ -->
               <fieldset class="question-card" data-required>
                 <span class="question-card__step" aria-hidden="true">Question 5 of 12</span>
-                <legend>How would you rate your overall experience today<span class="required-mark" aria-hidden="true">*</span>?
+                <legend>How would you rate your overall experience at the APCD Africa Day 2026 event<span class="required-mark" aria-hidden="true">*</span>?
                   <span class="visually-hidden">Required.</span>
                 </legend>
 
                 <div class="options" role="radiogroup" aria-required="true">
-                  <label class="option"><input type="radio" name="overall_rating" value="excellent" required>
-                    <span class="option__icon" aria-hidden="true">⭐⭐⭐⭐⭐</span>
-                    <span class="option__label">Excellent</span></label>
-                  <label class="option"><input type="radio" name="overall_rating" value="good" required>
-                    <span class="option__icon" aria-hidden="true">⭐⭐⭐⭐</span>
-                    <span class="option__label">Good</span></label>
-                  <label class="option"><input type="radio" name="overall_rating" value="average" required>
-                    <span class="option__icon" aria-hidden="true">⭐⭐⭐</span>
-                    <span class="option__label">Average</span></label>
-                  <label class="option"><input type="radio" name="overall_rating" value="below_expectations" required>
-                    <span class="option__icon" aria-hidden="true">⭐⭐</span>
-                    <span class="option__label">Below expectations</span></label>
-                  <label class="option"><input type="radio" name="overall_rating" value="poor" required>
-                    <span class="option__icon" aria-hidden="true">⭐</span>
-                    <span class="option__label">Poor</span></label>
+                  <label class="option">
+                    <input type="radio" name="overall_rating" value="excellent" required>
+                    <span class="rating-option">
+                      <span class="rating-stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
+                      <span class="option__label">Excellent</span>
+                    </span>
+                  </label>
+                  <label class="option">
+                    <input type="radio" name="overall_rating" value="good" required>
+                    <span class="rating-option">
+                      <span class="rating-stars" aria-hidden="true">⭐⭐⭐⭐</span>
+                      <span class="option__label">Good</span>
+                    </span>
+                  </label>
+                  <label class="option">
+                    <input type="radio" name="overall_rating" value="average" required>
+                    <span class="rating-option">
+                      <span class="rating-stars" aria-hidden="true">⭐⭐⭐</span>
+                      <span class="option__label">Average</span>
+                    </span>
+                  </label>
+                  <label class="option">
+                    <input type="radio" name="overall_rating" value="below_expectations" required>
+                    <span class="rating-option">
+                      <span class="rating-stars" aria-hidden="true">⭐⭐</span>
+                      <span class="option__label">Below expectations</span>
+                    </span>
+                  </label>
+                  <label class="option">
+                    <input type="radio" name="overall_rating" value="poor" required>
+                    <span class="rating-option">
+                      <span class="rating-stars" aria-hidden="true">⭐</span>
+                      <span class="option__label">Poor</span>
+                    </span>
+                  </label>
                 </div>
                 <p class="field-error" data-error-for="overall_rating">Please choose one option.</p>
               </fieldset>
@@ -861,8 +901,15 @@
                   </p>
                 </noscript>
                 <p class="privacy-note">
-                  We collect no personal data with your responses. Your
-                  feedback is fully anonymous.
+                  APCD is committed to your privacy. We do not collect any
+                  personal data through this survey. All responses are fully
+                  anonymous. If you choose to subscribe to the APCD newsletter,
+                  your email address is stored separately from your survey
+                  responses and is never linked to them. It will only be used
+                  to send you updates about APCD events and community news.
+                  You may unsubscribe at any time. APCD handles all personal
+                  data in accordance with the General Data Protection
+                  Regulation (GDPR) and applicable Irish data protection law.
                 </p>
               </div>
 
