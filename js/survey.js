@@ -4,11 +4,11 @@
    =========================================================
 
    - Hard close at 28 May 2026 23:59:59 Irish time
-   - Validates all required questions inline, with an a11y summary
+   - Validates the personal details (first name, last name, email)
+     plus all required survey questions, inline with an a11y summary
    - Toggles the conditional "Other" organisation field
-   - Toggles the conditional newsletter email field
-   - Submits the survey response to Web3Forms (no PII)
-   - Optionally sends a separate newsletter sign-up notification
+   - Submits the survey response to Web3Forms including the
+     respondent's contact details
    ========================================================= */
 
 /* ---------- 1. Constants ---------- */
@@ -20,7 +20,7 @@ const SURVEY_CLOSE_AT_UTC = new Date('2026-05-28T22:59:59Z');
 
 const SUBMITTED_FLAG_KEY = 'apcd_africa_day_2026_submitted';
 
-const NEWSLETTER_SOURCE = 'africa_day_2026';
+const SURVEY_SOURCE = 'africa_day_2026';
 const WEB3FORMS_API_URL = 'https://api.web3forms.com/submit';
 
 /* ---------- 2. Bootstrap ---------- */
@@ -126,6 +126,7 @@ function initLiveErrorClear() {
     const name = e.target && e.target.name;
     if (!name) return;
     clearFieldError(name);
+    if (e.target.classList) e.target.classList.remove('is-invalid');
     const card = e.target.closest('.question-card');
     if (card) card.classList.remove('has-error');
   });
@@ -168,22 +169,12 @@ function initFormSubmit() {
 
     hideErrorSummary();
 
-    // Build payload.
     const payload = buildSurveyPayload(form);
-    const newsletter = readNewsletterOptIn(form);
 
     setSubmitting(submitBtn, true);
 
     try {
       await submitToWeb3Forms(buildWeb3FormsSurveyPayload(form, payload));
-
-      // Keep newsletter sign-ups separate from anonymous survey feedback.
-      if (newsletter.optIn && newsletter.email) {
-        submitToWeb3Forms(buildWeb3FormsNewsletterPayload(newsletter.email))
-          .catch(function (err) {
-            console.warn('Newsletter notify failed:', err);
-          });
-      }
 
       markSubmittedLocally();
       showThankYouState();
@@ -235,6 +226,35 @@ function validateForm(form) {
   form
     .querySelectorAll('.field-error.is-visible')
     .forEach(function (e) { e.classList.remove('is-visible'); });
+  form
+    .querySelectorAll('input.is-invalid')
+    .forEach(function (el) { el.classList.remove('is-invalid'); });
+
+  // Personal details: first name, last name, email
+  const firstNameInput = form.querySelector('#first_name');
+  if (firstNameInput && !firstNameInput.value.trim()) {
+    ok = false;
+    firstNameInput.classList.add('is-invalid');
+    flagFieldError('first_name');
+    if (!firstInvalidField) firstInvalidField = firstNameInput;
+  }
+
+  const lastNameInput = form.querySelector('#last_name');
+  if (lastNameInput && !lastNameInput.value.trim()) {
+    ok = false;
+    lastNameInput.classList.add('is-invalid');
+    flagFieldError('last_name');
+    if (!firstInvalidField) firstInvalidField = lastNameInput;
+  }
+
+  const emailInput = form.querySelector('#email');
+  const emailValue = emailInput ? emailInput.value.trim() : '';
+  if (!emailValue || !isValidEmail(emailValue)) {
+    ok = false;
+    if (emailInput) emailInput.classList.add('is-invalid');
+    flagFieldError('email');
+    if (!firstInvalidField && emailInput) firstInvalidField = emailInput;
+  }
 
   // Required radio groups
   const requiredRadioNames = [
@@ -281,19 +301,6 @@ function validateForm(form) {
       ok = false;
       flagFieldError('organisation_other');
       if (!firstInvalidField && otherInput) firstInvalidField = otherInput;
-    }
-  }
-
-  // Newsletter: if opted in WITH an email present, validate it.
-  // (An empty email + opt-in is allowed — opt-in without email simply
-  // means we record no signup.)
-  const optIn = form.querySelector('#newsletter_optin');
-  const emailInput = form.querySelector('#newsletter_email');
-  if (optIn && optIn.checked && emailInput && emailInput.value.trim()) {
-    if (!isValidEmail(emailInput.value.trim())) {
-      ok = false;
-      flagFieldError('newsletter_email');
-      if (!firstInvalidField) firstInvalidField = emailInput;
     }
   }
 
@@ -379,6 +386,9 @@ function buildSurveyPayload(form) {
   const openFb = (data.get('open_feedback') || '').toString().trim();
 
   return {
+    first_name:         (data.get('first_name') || '').toString().trim().slice(0, 80),
+    last_name:          (data.get('last_name')  || '').toString().trim().slice(0, 80),
+    email:              (data.get('email')      || '').toString().trim().slice(0, 254),
     respondent_type:    data.get('respondent_type'),
     organisation:       orgChoice,
     organisation_other: orgOther,
@@ -404,26 +414,20 @@ function collectChecked(form, name) {
   return out;
 }
 
-function readNewsletterOptIn(form) {
-  const optIn = form.querySelector('#newsletter_optin');
-  const emailInput = form.querySelector('#newsletter_email');
-  const email = emailInput ? emailInput.value.trim() : '';
-
-  return {
-    optIn: !!(optIn && optIn.checked),
-    email: optIn && optIn.checked && email && isValidEmail(email) ? email : ''
-  };
-}
-
 /* ---------- 9. Web3Forms submission ---------- */
 
 function buildWeb3FormsSurveyPayload(form, payload) {
+  const fullName = (payload.first_name + ' ' + payload.last_name).trim();
   return {
-    subject: 'Africa Day 2026 Survey - New Response',
-    from_name: 'APCD Website',
+    subject: 'Africa Day 2026 Survey - New Response from ' + fullName,
+    from_name: fullName || 'APCD Website',
+    replyto: payload.email,
     form_name: 'Africa Day 2026 Feedback Survey',
-    source: NEWSLETTER_SOURCE,
+    source: SURVEY_SOURCE,
     submitted_at: new Date().toISOString(),
+    first_name: payload.first_name,
+    last_name: payload.last_name,
+    email: payload.email,
     respondent_type: selectedOptionText(form, 'respondent_type'),
     organisation: organisationText(form, payload),
     age_range: selectedOptionText(form, 'age_range'),
@@ -440,22 +444,8 @@ function buildWeb3FormsSurveyPayload(form, payload) {
   };
 }
 
-function buildWeb3FormsNewsletterPayload(email) {
-  return {
-    subject: 'New APCD Newsletter Signup',
-    from_name: 'APCD Website',
-    form_name: 'APCD Newsletter Signup',
-    source: NEWSLETTER_SOURCE,
-    email: email,
-    message:
-      'A new APCD newsletter signup was received.\n\n' +
-      'Email: ' + email + '\n' +
-      'Source: ' + NEWSLETTER_SOURCE + '\n' +
-      'Submitted: ' + new Date().toISOString()
-  };
-}
-
 function buildSurveyMessage(form, payload) {
+  const fullName = (payload.first_name + ' ' + payload.last_name).trim();
   const lines = [
     'Africa Day 2026 - New Survey Response',
     '====================================',
@@ -465,6 +455,9 @@ function buildSurveyMessage(form, payload) {
       dateStyle: 'medium',
       timeStyle: 'short'
     }),
+    '',
+    'Respondent:  ' + (fullName || '(not provided)'),
+    'Email:       ' + (payload.email || '(not provided)'),
     '',
     'Respondent type: ' + selectedOptionText(form, 'respondent_type'),
     'Organisation: ' + organisationText(form, payload),

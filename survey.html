@@ -229,7 +229,8 @@
     .conditional input[type="text"],
     .conditional input[type="email"],
     .question-card textarea,
-    .question-card input[type="text"] {
+    .question-card input[type="text"],
+    .question-card input[type="email"] {
       width: 100%;
       padding: 0.85rem 1rem;
       border: 1px solid var(--border);
@@ -243,10 +244,36 @@
 
     .conditional input:focus,
     .question-card textarea:focus,
-    .question-card input[type="text"]:focus {
+    .question-card input[type="text"]:focus,
+    .question-card input[type="email"]:focus {
       outline: none;
       border-color: var(--gold);
       box-shadow: 0 0 0 3px rgba(230, 168, 23, 0.25);
+    }
+
+    /* Personal details section (above Q1). Two-column on >=640px,
+       stacks on mobile. Email always spans the full row. */
+    .personal-details__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-top: 0.25rem;
+    }
+    .personal-details__field--full { grid-column: 1 / -1; }
+    @media (min-width: 640px) {
+      .personal-details__grid { grid-template-columns: 1fr 1fr; }
+    }
+    .personal-details__label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+    .question-card input.is-invalid,
+    .question-card input.is-invalid:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.18);
     }
 
     .question-card textarea {
@@ -269,58 +296,6 @@
     .question-card.has-error,
     .question-card.has-error .question-card__step {
       border-color: var(--red);
-    }
-
-    /* Newsletter section */
-    .newsletter-block {
-      background: var(--dark-bg);
-      color: #fff;
-      border-radius: var(--radius-md);
-      padding: clamp(1.5rem, 3vw, 2rem);
-      margin: 1.75rem 0 1.5rem;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(230, 168, 23, 0.25);
-    }
-    .newsletter-block::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(to right, var(--red), var(--gold), var(--green));
-    }
-    .newsletter-block h2 {
-      color: #fff;
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.3rem, 1vw + 1rem, 1.7rem);
-    }
-    .newsletter-block p {
-      color: rgba(255, 255, 255, 0.82);
-      margin: 0 0 1rem;
-      font-size: 0.97rem;
-    }
-    .newsletter-block .option {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(230, 168, 23, 0.3);
-      color: #fff;
-    }
-    .newsletter-block .option:hover {
-      border-color: var(--gold);
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .newsletter-block .option:has(input:checked) {
-      border-color: var(--gold);
-      background: rgba(230, 168, 23, 0.14);
-      box-shadow: 0 0 0 1px var(--gold) inset;
-    }
-    .newsletter-block .option__label { color: #fff; }
-    .newsletter-block .conditional { border-top-color: rgba(255, 255, 255, 0.18); }
-    .newsletter-block label {
-      display: block;
-      font-size: 0.86rem;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 0.4rem;
-      font-weight: 500;
     }
 
     /* Submit row */
@@ -536,8 +511,7 @@
         <h1>Africa Day 2026 — Your Feedback Matters</h1>
         <p class="banner__sub">
           Thank you for joining us today. This short survey helps us improve
-          future events. It takes less than 3&nbsp;minutes and collects no
-          personal data.
+          future events. It takes less than 3&nbsp;minutes to complete.
         </p>
       </div>
       <div class="pan-stripe" style="position:absolute; left:0; right:0; bottom:0;" aria-hidden="true"></div>
@@ -557,8 +531,8 @@
               <h2>Tell us how today went</h2>
               <p>
                 Your honest feedback shapes how APCD plans Africa Day in the
-                years to come. All responses are anonymous unless you choose to
-                join our newsletter at the end.
+                years to come. Your contact details are used only to follow up
+                on your feedback &mdash; see the privacy notice below.
               </p>
               <span class="survey-intro__meta">Sunday 24 May 2026 &nbsp;|&nbsp; Letterkenny Community Centre</span>
             </div>
@@ -577,6 +551,63 @@
             </div>
 
             <form id="survey-form" novalidate>
+
+              <!-- ============ Your Details ============ -->
+              <fieldset class="question-card personal-details" data-required>
+                <legend>Your Details<span class="required-mark" aria-hidden="true">*</span></legend>
+                <span class="question-card__hint">
+                  Required to process your feedback. See our privacy notice
+                  below.
+                </span>
+
+                <div class="personal-details__grid">
+                  <div>
+                    <label class="personal-details__label" for="first_name">
+                      First Name<span class="required-mark" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="first_name"
+                      name="first_name"
+                      required
+                      autocomplete="given-name"
+                      maxlength="80"
+                      aria-required="true">
+                    <p class="field-error" data-error-for="first_name">Please enter your first name.</p>
+                  </div>
+
+                  <div>
+                    <label class="personal-details__label" for="last_name">
+                      Last Name<span class="required-mark" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="last_name"
+                      name="last_name"
+                      required
+                      autocomplete="family-name"
+                      maxlength="80"
+                      aria-required="true">
+                    <p class="field-error" data-error-for="last_name">Please enter your last name.</p>
+                  </div>
+
+                  <div class="personal-details__field--full">
+                    <label class="personal-details__label" for="email">
+                      Email Address<span class="required-mark" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      autocomplete="email"
+                      maxlength="254"
+                      placeholder="you@example.com"
+                      aria-required="true">
+                    <p class="field-error" data-error-for="email">Please enter a valid email address.</p>
+                  </div>
+                </div>
+              </fieldset>
 
               <!-- ============ Q1 Respondent Type ============ -->
               <fieldset class="question-card" data-required>
@@ -850,37 +881,6 @@
                   placeholder="Your thoughts here…"></textarea>
               </div>
 
-              <!-- ============ Newsletter ============ -->
-              <div class="newsletter-block">
-                <h2>Stay connected with APCD</h2>
-                <p>
-                  Would you like to hear from us about future events, community
-                  news, and updates from African People Collaboration Donegal?
-                </p>
-
-                <div class="options">
-                  <label class="option">
-                    <input type="checkbox" id="newsletter_optin" name="newsletter_optin" data-toggle-conditional="newsletter-email-wrap">
-                    <span class="option__label">Yes, I would like to sign up for the APCD newsletter</span>
-                  </label>
-                </div>
-
-                <div id="newsletter-email-wrap" class="conditional">
-                  <label for="newsletter_email">
-                    Your email address
-                    <span style="font-weight:400; color: rgba(255,255,255,0.6);">(optional — only used for the APCD newsletter)</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="newsletter_email"
-                    name="newsletter_email"
-                    autocomplete="email"
-                    placeholder="you@example.com"
-                    maxlength="254">
-                  <p class="field-error" data-error-for="newsletter_email" style="border-left-color:#ffb3aa; background:rgba(255,255,255,0.06); color:#ffd9d2;">Please enter a valid email address.</p>
-                </div>
-              </div>
-
               <!-- ============ Submit ============ -->
               <div class="submit-row">
                 <button id="survey-submit" type="submit" class="btn btn--primary form__submit">
@@ -901,15 +901,19 @@
                   </p>
                 </noscript>
                 <p class="privacy-note">
-                  APCD is committed to your privacy. We do not collect any
-                  personal data through this survey. All responses are fully
-                  anonymous. If you choose to subscribe to the APCD newsletter,
-                  your email address is stored separately from your survey
-                  responses and is never linked to them. It will only be used
-                  to send you updates about APCD events and community news.
-                  You may unsubscribe at any time. APCD handles all personal
-                  data in accordance with the General Data Protection
-                  Regulation (GDPR) and applicable Irish data protection law.
+                  APCD is committed to protecting your personal data. The
+                  first name, last name, and email address you provide are
+                  collected solely for the purpose of processing and following
+                  up on your event feedback. This information is held securely,
+                  will not be shared with third parties, and will not be used
+                  for marketing purposes. Your survey responses are linked to
+                  your contact details only for internal event evaluation
+                  purposes. APCD handles all personal data in accordance with
+                  the General Data Protection Regulation (GDPR) and applicable
+                  Irish data protection law. You have the right to access,
+                  correct, or request deletion of your personal data at any
+                  time by contacting us at
+                  <a href="mailto:apcdonegal@gmail.com">apcdonegal@gmail.com</a>.
                 </p>
               </div>
 
