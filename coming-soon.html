@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D2B1A">
+  <meta name="description" content="African People Collaboration Donegal (APCD).">
+  <title>APCD</title>
+  <link rel="icon" type="image/png" href="assets/APCD/logo-light.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --green: #1A6B3A;
+      --gold: #E6A817;
+      --red: #C0392B;
+      --background: #0D2B1A;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100svh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(26, 107, 58, 0.22), transparent 38%),
+        var(--background);
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      isolation: isolate;
+    }
+
+    .logo-stage {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      width: clamp(10rem, 34vmin, 24rem);
+      aspect-ratio: 1;
+      animation: drift 24s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .logo-rotation {
+      width: 100%;
+      height: 100%;
+      animation: rotate 42s linear infinite;
+      will-change: transform;
+    }
+
+    .logo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: sepia(1) saturate(4) hue-rotate(78deg) brightness(0.9);
+      animation: tint 18s linear infinite;
+      will-change: filter;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .contact {
+      position: absolute;
+      z-index: 1;
+      right: max(1.25rem, env(safe-area-inset-right));
+      bottom: max(1.5rem, env(safe-area-inset-bottom));
+      left: max(1.25rem, env(safe-area-inset-left));
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      line-height: 1.5;
+      text-align: center;
+      letter-spacing: 0.015em;
+    }
+
+    .contact a {
+      color: #F2C75C;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.22em;
+    }
+
+    .contact a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 0.3rem;
+      border-radius: 0.1rem;
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(-50%, -50%) translate(0, 0); }
+      14% { transform: translate(-50%, -50%) translate(min(12vw, 5rem), calc(-1 * min(9vh, 3rem))); }
+      29% { transform: translate(-50%, -50%) translate(min(20vw, 8rem), min(8vh, 3rem)); }
+      43% { transform: translate(-50%, -50%) translate(min(6vw, 2.5rem), min(17vh, 6rem)); }
+      58% { transform: translate(-50%, -50%) translate(calc(-1 * min(16vw, 6rem)), min(11vh, 4rem)); }
+      73% { transform: translate(-50%, -50%) translate(calc(-1 * min(20vw, 8rem)), calc(-1 * min(7vh, 2.5rem))); }
+      87% { transform: translate(-50%, -50%) translate(calc(-1 * min(7vw, 3rem)), calc(-1 * min(15vh, 5rem))); }
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes tint {
+      0%, 100% { filter: sepia(1) saturate(4.2) hue-rotate(78deg) brightness(0.88); }
+      30% { filter: sepia(1) saturate(5.5) hue-rotate(2deg) brightness(1.08); }
+      36% { filter: sepia(1) saturate(5.5) hue-rotate(2deg) brightness(1.08); }
+      63% { filter: sepia(1) saturate(5.8) hue-rotate(322deg) brightness(0.9); }
+      69% { filter: sepia(1) saturate(5.8) hue-rotate(322deg) brightness(0.9); }
+    }
+
+    @media (max-height: 34rem) {
+      .logo-stage {
+        top: 42%;
+        width: clamp(8rem, 30vmin, 15rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo-stage" aria-hidden="true">
+      <div class="logo-rotation">
+        <img class="logo" src="assets/APCD/logo-light.png" alt="">
+      </div>
+    </div>
+
+    <p class="contact">For enquiries, contact the APCD <a href="tel:+353874926858">+353 87 492 6858</a></p>
+  </main>
+</body>
+</html>
